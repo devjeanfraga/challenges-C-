@@ -7,7 +7,7 @@ int binarySearch( T arr[], int len, T value);
 int main() {
   // Escreva seu código aqui
   int nums[10] = {1,2,3,4,5,6,7,8,9,10}; 
-  int n = binarySearch<int>(nums, 10, 4);
+  int n = binarySearch<int>(nums, 10, 20);
   cout <<  n ;
   
   return 0;
@@ -22,9 +22,7 @@ int binarySearch( T arr[], int len, T value) {
     else start = middle+1;
     middle = int( (start + end) / 2);
   };
-
   return arr[middle] == value ? middle : -1;
-
   /*
     ***Anoter away***
 
