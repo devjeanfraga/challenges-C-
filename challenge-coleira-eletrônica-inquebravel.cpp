@@ -1,30 +1,33 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
 int main(){
-  char C;
-	long int num, M;
-  int D, N= 0, L= 0, O= 0, S= 0;
-  cin >> num >> M;
-  while (cin >> C >> D && --num ) {
-    switch (C) {
+
+  char direction;
+	int qtyTest, bound, distance;
+  bool isNotOutOfBound = false;
+  float X= 0, Y= 0; //positions 
+
+  cin >> qtyTest >> bound;
+  while (cin >> direction >> distance && qtyTest-- && !isNotOutOfBound) {
+    switch (direction) {
       case 'N':
-        N += D;
-        break;
-      case 'L':
-        L += D;
-        break;
-      case 'O':
-        O += D;
+        Y += distance;
         break;
       case 'S':
-        S += D;
+        Y -= distance;
+        break;
+      case 'L':
+        X += distance;
+        break;
+      case 'O':
+        X -= distance;
         break;
     };
+    isNotOutOfBound = sqrt( (X*X) + (Y*Y) ) > bound;
   }
-  bool isOutOfBound = N > M || L > M || O > M|| S > M;
-  cout << isOutOfBound;
+  cout << isNotOutOfBound;
 	return 0;
 }
-

@@ -6,10 +6,10 @@
 using namespace std;
 
 struct Node{
-	char *name;
+	char* name;
 	int idade;
 	
-	Node(char *n=0, int age=0){ /*****ponteiros para contrutores de copias.****/
+	Node(char* n=0, int age=0){ /*****ponteiros para contrutores de copias.****/
 		name= strdup(n);
 		idade= age;
 	}
@@ -35,21 +35,21 @@ struct Node{
 };
 
 
-/*********ponteiros para funçoes*********/
+/*********ponteiros para funï¿½oes*********/
 
 double f(double x); // multiplica um double por 2. 
 
 double soma(double(*f)(double), int n, int m);
-/*o parametro double(*f) siginifica o ponteiro para uma funçao do tipo double. 
-Aqui (double) significa que o retorno tbm será do tipo double 
+/*o parametro double(*f) siginifica o ponteiro para uma funï¿½ao do tipo double. 
+Aqui (double) significa que o retorno tbm serï¿½ do tipo double 
 Os parenteses em torno de *f denotam precedencia. 
 */
 
 double raiz(double (*f)(double), double a, double b, double epsilon);
-/*Encontra uma raiz de função continua em um intervalo, a raiz é encontrada bissectando-se repetitivamente um intervalo
-e encontrando o ponto médio do intervalo corrente, se o ponto médio for 0 ou se o intervalo for menor que um valor pequeno
-o ponto médio é retornado*/
-/*Se o valores da função no limite esquerdo do intervalo corrente e o ponto médio tiverem sinais oposto, a pesquisa
+/*Encontra uma raiz de funï¿½ï¿½o continua em um intervalo, a raiz ï¿½ encontrada bissectando-se repetitivamente um intervalo
+e encontrando o ponto mï¿½dio do intervalo corrente, se o ponto mï¿½dio for 0 ou se o intervalo for menor que um valor pequeno
+o ponto mï¿½dio ï¿½ retornado*/
+/*Se o valores da funï¿½ï¿½o no limite esquerdo do intervalo corrente e o ponto mï¿½dio tiverem sinais oposto, a pesquisa
 continua na metade da esquerda do intervalo corrente, caso contrario, o intervalo corrente torna-se sua metade direita*/
 
 int main(){
