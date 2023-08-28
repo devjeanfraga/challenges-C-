@@ -39,18 +39,14 @@ void merge (
 
   // Ordena os elementos 
   int leftIdx = 0, rightIdx = 0, idx = first;
-  while ( leftIdx < sizeA && rightIdx < sizeB ) {  
-   
+  while ( leftIdx < sizeA && rightIdx < sizeB ) {    
     if( arrA[leftIdx] <= arrB[rightIdx] ) {
       arr[idx] = arrB[rightIdx];
       rightIdx += 1;
-
     } else {
       arr[idx] = arrA[leftIdx];
       leftIdx += 1;
-
     };
-
     idx += 1;
   };
 
