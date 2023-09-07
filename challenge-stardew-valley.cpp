@@ -4,19 +4,24 @@ using namespace std;
 
 int main() {
   // Escreva seu c�digo aqui
-  int X, Y, sum = 0;
-  cin >> X >> Y;
+  int qtyRow, qtyCol, sum = 0;
+  cin >> qtyRow >> qtyCol;
 
-  int plantation[X][Y] = {};
-  for (int l = 0;l < X; l++ ) for (int c = 0; c < Y; c++) cin >> plantation[l][c];
+  int **plantation;
+  plantation = new int* [qtyRow];
+  for (int i = 0; i < qtyRow; i++ ) plantation[i] = new int [qtyCol];
+
+  for (int x = 0; x < qtyRow; x++ ) for (int y = 0; y < qtyCol; y++) cin >> plantation[x][y];
 
   char direction;
   int id;
   cin >> direction >> id;
-  id = id -1;
-  if (direction == 'C') for (int i = 0; i < X; i++) sum += plantation[i][id];
-  if (direction == 'L') for (int j = 0; j < X; j++) sum += plantation[id][j];
+  id -= 1;
+  if (direction == 'C') for (int i = 0; i < qtyRow; i++) sum += plantation[i][id];
+  if (direction == 'L') for (int j = 0; j < qtyCol; j++) sum += plantation[id][j];
   
+  for (int i = 0; i < qtyRow; i++ ) delete [] plantation[i];
+  delete [] plantation;
   cout << sum;
   return 0;
 };
