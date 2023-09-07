@@ -32,7 +32,7 @@ int main() {
     int x = 0, y = 0;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 5; j++) {
-            if ( arr[i][j]%2 != 0 )  {
+            if ( arr[i][j]%2 != 0 ) {
                 arr2[x][y] = arr[i][j];
                 y += 1;
                 if (y == 3) {
