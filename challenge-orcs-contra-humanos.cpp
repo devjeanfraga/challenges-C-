@@ -1,109 +1,45 @@
 #include <iostream>
 using namespace std;
+const int size = 12;
 
 int main() {
   // Escreva seu código aqui
-  // inicializar contadores e dimensoes da matriz
-  int size = 10, orcs = 0, humans = 0;
-
-  // inicializar booleanos para verificar a presença do mago;
+  int orcs = 0, humans = 0;
   bool gotOrcWizard = false, gotHumanWizard = false;
-  
-  // inicializar matriz 
+
+  // inicialização do array dinamico;
   char** battlefield; 
   battlefield = new char* [size];
   for (int i = 0; i < size; i++) battlefield[i] = new char[size];
 
-  // popular matriz 
-  for (int x = 0; x < size; x++) {
-    for (int y = 0; y < size; y++) cin >> battlefield[x][y];
-  };
-  
-  // percorrer matriz da col 0-4
-  // verificar se existe mago no lado esquerdo;
-  int start = 0;
-  for (int row = 0; row < size; row++) {
-    for (int col = start; col < size-5; col++) {
-        if(battlefield[row][col] == 'm') {
-          gotOrcWizard = true;
-          break;
-        }; 
-      };
+  // coleta de inputs e verificaçao de magos;
+  for (int x = 1; x < size-1; x++) for (int y = 1; y < size-1; y++) {
+    cin >> battlefield[x][y];
+    if (battlefield[x][y] == 'm' && y <= 5) gotOrcWizard = true;
+    if (battlefield[x][y] == 'm' && y >= 6) gotHumanWizard = true;
   };
 
-  // percorrer matriz da col 5-9
-  // verificar se existe mago no lado direito;
-  start = 5;
-  for (int row = 0; row < size; row++) {
-    for (int col = start; col < size; col++) {
-        if(battlefield[row][col] == 'm') {
-          gotHumanWizard = true;
-          break;
-        }; 
+  // somatorio de poderes de orcs humans;
+  for (int row = 1; row <= 10; row++) for (int col = 1; col <= 10; col++) {
+    char entity = col <= 5 ? 'o' : 'h';
+    bool wizard = col <= 5 ? gotOrcWizard : gotHumanWizard;
+    int qtyPower = 0;
+
+    if ( battlefield[row][col] != '*') {
+      if (wizard) { 
+        if (battlefield[row][col-1] == entity || battlefield[row][col-1] == 'm') qtyPower += 1; // left
+        if (battlefield[row-1][col] == entity || battlefield[row-1][col] == 'm') qtyPower += 1; // up
+        if (battlefield[row][col+1] == entity || battlefield[row][col+1] == 'm') qtyPower += 1; // right
+        if (battlefield[row+1][col] == entity || battlefield[row+1][col] == 'm') qtyPower += 1; // down
       };
-  };
-
-  // declarar elemento e lados horizontais e verticais para os próximos loops;
-  char el, left, right, up, down;
-
-  // Orc Side; 
-  // for aninhado percorre a matriz de 0-4;
-  // se tiver mago soma os lados na horizontal e vertical
-  // se nao tiver mago soma apenas o elemento diferente de '*'; 
-  for (int row = 0; row < size; row++) {
-    for (int col = 0; col < size-5; col++) {
-        el = battlefield[row][col];
-        if ( el != '*') {
-          if (gotOrcWizard) {
-            // ternário para não acessar lixo;
-            left = col != 0 ? battlefield[row][col-1] : '0',
-            right = col != size-5-1 ? battlefield[row][col+1] : '0',
-            up = row != 0 ? battlefield[row-1][col] : '0',
-            down = row != size-1 ? battlefield[row+1][col] : '0';
-
-            if (el == left) orcs += 1;
-            if (el == up) orcs += 1;
-            if (el == right) orcs += 1;
-            if (el == down) orcs += 1;
-          };
-          orcs += 1;
-        };
-      };  
-  }
-  
-  // Human Side;
-  // for aninhado percorre a matriz de 5-9;
-  // se tiver mago soma os lados na horizontal e vertical
-  // se nao tiver mago soma apenas o elemento diferente de '*';
-    for (int row = 0; row < size; row++) {
-      for (int col = 5; col < size; col++) {
-        el = battlefield[row][col];
-        if (el != '*') {
-          if (gotHumanWizard) {
-            // ternário para não acessar lixo;
-            left = col != 5 ? battlefield[row][col-1] : '0',
-            right = col != size-1 ? battlefield[row][col+1] : '0',
-            up = row != 0 ? battlefield[row-1][col] : '0',
-            down = row != size-1 ? battlefield[row+1][col] : '0';
-
-            if (el == left) humans += 1;
-            if (el == up) humans += 1;
-            if (el == right) humans += 1;
-            if (el == down) humans += 1;
-          };
-          humans += 1;
-        };
-      };
+      qtyPower += 1;
+      col <= 5 ? orcs += qtyPower : humans += qtyPower;
     };
-  
-  // tratamento de output
-  string warCry; 
-  if (orcs == humans) warCry = "Batalha lendaria!";
-  else if (orcs > humans) warCry = "Loktar Ogar!!!";
-  else warCry = "Pela Alianca!";
+  };
 
-  // output
-  cout << warCry; 
+  if (orcs == humans) cout << "Batalha lendaria! ";
+  else if (orcs > humans) cout << "Loktar Ogar!!! ";
+  else cout << "Pela Alianca! ";
 
   // liberação de memória; 
   for (int i = 0; i < size; i++) delete [] battlefield[i];
