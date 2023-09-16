@@ -15,12 +15,12 @@ int main() {
 
 template <class T> 
 int binarySearch( T arr[], int len, T value) {
-  int start = 0, end = len-1, middle = int( (start + end) / 2);
+  int start = 0, end = len-1, middle = start + (end-start) / 2;
   
   while (arr[middle] != value && start <= end) {
     if(value < arr[middle]) end = middle-1;
     else start = middle+1;
-    middle = int( (start + end) / 2);
+    middle = start + (end-start) / 2;
   };
   return arr[middle] == value ? middle : -1;
   /*
