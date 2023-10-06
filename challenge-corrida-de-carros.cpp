@@ -12,8 +12,8 @@ int main() {
   int qtyCars, qtyRounds;
   cin >> qtyCars >> qtyRounds;
 
-  Car curr, 
-      arrCars[qtyCars] = {};
+  Car curr; 
+  Car arrCars[qtyCars] = {};
   int inputs[qtyCars][qtyRounds] = {};
 
   for (int x = 0; x < qtyCars; x++) {
