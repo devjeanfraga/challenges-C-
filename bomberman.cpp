@@ -77,5 +77,7 @@ int main() {
     for (int i = 0; i < altura; i++) {
         cout << cenario[i] << endl;
     };
+
+    cout << "Hello world";
     return 0;
 };
